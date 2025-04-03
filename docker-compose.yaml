@@ -4,7 +4,6 @@ services:
       context: ./uvx
     command: >
       uvx mcpo --port 8008 --config /config/config.json
-    #WAS:  -- uvx mcp-server-time --local-timezone=America/Chicago
     ports:
       - "8008:8008"
     networks:
