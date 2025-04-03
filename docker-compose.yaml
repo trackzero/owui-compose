@@ -46,12 +46,6 @@ services:
       - open-webui    
     depends_on:
       - uvx
-    #runtime: nvidia
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - capabilities: [gpu]
 
 networks:
   open-webui:
