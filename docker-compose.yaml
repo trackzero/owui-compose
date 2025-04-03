@@ -1,16 +1,17 @@
 services:
-  mcpo:
-    image: ghcr.io/astral-sh/uv:debian
-    container_name: mcpo
-    command: uvx mcpo --config /data/config.json
-    working_dir: /data
-    volumes:
-      - ./mcpo-config:/data
+  uvx:
+    build:
+      context: ./uvx
+    command: >
+      uvx mcpo --port 8008 --config /config/config.json
+    #WAS:  -- uvx mcp-server-time --local-timezone=America/Chicago
     ports:
-      - "8000:8000"
+      - "8008:8008"
+    networks:
+      - open-webui
+    volumes:
+      - ./mcpo-config:/config:ro
     restart: unless-stopped
-    extra_hosts:
-      - host.docker.internal:host-gateway
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
@@ -19,6 +20,8 @@ services:
     ports:
       - "11434:11434"
     restart: unless-stopped
+    networks:
+      - open-webui
     tty: true
     runtime: nvidia
     deploy:
@@ -39,13 +42,20 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
+    networks:
+      - open-webui    
+    depends_on:
+      - uvx
+    #runtime: nvidia
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - capabilities: [gpu]
 
+networks:
+  open-webui:
+    driver: bridge
 volumes:
   ollama:
     name: ollama
@@ -53,6 +63,6 @@ volumes:
   open-webui:
     name: open-webui
     external: true
-
+  
 
 
