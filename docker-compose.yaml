@@ -1,4 +1,16 @@
 services:
+  mcpo:
+    image: ghcr.io/astral-sh/uv:debian
+    container_name: mcpo
+    command: uvx mcpo --config /data/config.json
+    working_dir: /data
+    volumes:
+      - ./mcpo-config:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
