@@ -14,32 +14,48 @@ This repository provides a Docker Compose setup for deploying Open WebUI (OWUI) 
    ```bash
    git clone https://github.com/trackzero/owui-compose.git
    cd owui-compose
+   ```
 
+2. **Ensure Required Named Volumes Exist**:
 
-1. Start the Services:
+   This project uses **external named volumes** for `ollama` and `open-webui`. If you haven't created them yet, run:
 
-Build and start the services using Docker Compose:
+   ```bash
+   docker volume create ollama
+   docker volume create open-webui
+   ```
 
-```bash
-docker-compose up --build
-```
-The services will start in the foreground (recommended for first run to see any errors).
+   If you're already running ollama and open-webui containers from the original OWUI setup, you can re-mount them by verifying their names and using the `external: true` tag.
 
-After the first run, you can run them in detached mode (and no longer need to use --build):
+   I....I've said this before and right here it bears repeating: I don't know what I'm doing a lot of the time and I take a lot of shortcuts, but stuff seems to work.  You've heard of vibe-coding?  Imagine that, but the vibe is bourbon.
 
-'''bash
-docker-compose up -d
+3. **Start the Services**:
 
+   Build and start the services using Docker Compose:
 
+   ```bash
+   docker-compose up --build
+   ```
 
-1. Accessing the Application:
+   The services will start in the foreground (recommended for the first run to catch any errors).
 
-Once the services are running, access OWUI by navigating to http://localhost:3000 in your web browser.
+   After the first successful run, you can start them in detached mode (and skip `--build` unless you've changed the Dockerfile):
 
+   ```bash
+   docker-compose up -d
+   ```
 
-1. Configuring stuff
+4. **Accessing the Application**:
 
-Look at the original project references.
+   Once the services are running, access OWUI by navigating to:
+
+   ```
+   http://localhost:3000
+   ```
+
+5. **Configuring Stuff**:
+
+   Look at the original project references below for usage, configuration, and customization options of the various components.  For mcpo, you'll find the config file in ./mcpo-config/config.json. It's a bind mount so it's easier to edit.  It currently only contains a time mcp.
 
 ---
 
