@@ -57,6 +57,8 @@ This repository provides a Docker Compose setup for deploying Open WebUI (OWUI) 
 
    Look at the original project references below for usage, configuration, and customization options of the various components.  For mcpo, you'll find the config file in ./mcpo-config/config.json. It's a bind mount so it's easier to edit.  It currently only contains a time mcp.
 
+6. **Updating**:
+   `docker compose pull` to update.
 ---
 
 ## 🔗 Project References
