@@ -6,6 +6,7 @@ This repository provides a Docker Compose setup for deploying Open WebUI (OWUI) 
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- NVIDIA GPU
 
 ## Setup Instructions
 
@@ -37,7 +38,7 @@ This repository provides a Docker Compose setup for deploying Open WebUI (OWUI) 
    docker-compose up --build
    ```
 
-   The services will start in the foreground (recommended for the first run to catch any errors).
+   The services will start in the foreground (recommended for the first run to catch any errors, and yes I know there are better ways).
 
    After the first successful run, you can start them in detached mode (and skip `--build` unless you've changed the Dockerfile):
 
